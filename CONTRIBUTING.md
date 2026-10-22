@@ -1,72 +1,25 @@
-# Contributing to HyperSpace
+# Contributing to HyperSpaceOS
 
-Thank you for considering contributing to HyperSpace. Contributions that improve the browser-native desktop experience are welcome.
+Keep changes focused on a specific desktop interaction, application or defect. Explain the user-visible problem before proposing a new abstraction or dependency.
 
-## How Can I Contribute?
+## Bug reports
 
-### Reporting Bugs
+Include browser and operating-system versions, reproduction steps, expected and actual behaviour, and relevant console output. State whether the issue occurs with existing browser data or a fresh profile. Remove private file contents, camera images and personal information from reports.
 
-- Check the existing issues before opening a new report.
-- Include the operating system, browser, steps to reproduce, expected behavior, actual behavior, and screenshots when useful.
-- Separate observed behavior from assumptions and include relevant command output or runtime evidence.
+## Development
 
-### Suggesting Enhancements
+Use `npm install` and `npm run dev`. Run `npm test` and `npm run build` for code changes. For browser behaviour, follow the runtime-harness setup in the README and record the actual command results. A passing build alone does not establish working window interactions.
 
-- Explain the problem the enhancement would solve and why it benefits the project.
-- Include a sketch or mockup for UI changes when helpful.
+## Areas to check
 
-### Pull Requests
+- Window changes: open, focus, minimise, restore, resize, snap, close and workspace transitions.
+- Persistent data: reload behaviour, existing data compatibility and failure recovery.
+- App lifecycle: remove event listeners, timers, streams and other resources when closing.
+- UI changes: keyboard access, focus, narrow viewports and reduced-motion behaviour where relevant.
+- Network features: unavailable services, failed requests and sites that reject embedding.
 
-1. Fork the repository and create a focused branch for your feature or fix.
-2. Follow the existing project structure and use ES6+ features where appropriate.
-3. Preserve the semantic tokens and restrained HyperSpace visual language.
-4. Keep changes scoped and avoid unrelated formatting or generated files.
-5. Run the relevant tests, build, and verification commands before opening a pull request.
-6. Describe the behavior changed, the commands run, and any known limitations.
-7. Keep commit messages descriptive and submit the pull request against `main`.
+Do not claim email delivery, native device telemetry, cloud persistence or LLM behaviour for local demonstrations.
 
-Do not commit secrets, `.env` files, `node_modules/`, `dist/`, test reports, or other generated dependency/build directories. Do not modify recorded verification evidence to imply that a check ran when it did not.
+## Pull requests
 
-## Technical Guidelines
-
-### Architecture
-
-HyperSpace is built with a modular architecture:
-
-- **Core**: Kernel, FileSystem, and EventBus are the backbone. Avoid heavy modifications here unless necessary.
-- **Apps**: New applications should be placed in `src/apps/[app-name]`.
-- **UI**: Shared components belong in `src/ui`.
-
-### Styling
-
-- Use **CSS Variables** defined in `src/styles/variables.css` for consistency.
-- Maintain the glass effect using `backdrop-filter: blur()` and semi-transparent backgrounds.
-- Ensure components remain responsive at the supported viewport sizes.
-
-### Virtual File System
-
-- If an app needs to save data, use the `FileSystem` API rather than raw `localStorage`. This keeps data visible in the Files and Terminal apps.
-
-## Local Verification
-
-The commands below are the repository's documented local checks:
-
-```bash
-npm install
-npm test
-npm run build
-npm run dev -- --host 127.0.0.1
-python scripts/verify_runtime.py
-```
-
-Only describe browser verification as passing when the verifier exits successfully. Screenshots are diagnostic artifacts, not proof by themselves. Mail is local-only, and Browser and Weather behavior remains network-dependent.
-
-## Code of Conduct
-
-We are committed to providing a friendly, safe, and welcoming environment for everyone, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the **MIT License**.
-
-Happy Coding!
+Describe the problem, changed files, checks actually run, remaining gaps and any data or permission implications. Include screenshots for visual changes, but do not treat screenshots as behavioural test results. Avoid unrelated reformatting or generated verification artifacts unless they are necessary evidence for the change.
